@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
             samples.push_back(t[0]);
 
             // 適当なステップ毎にランダムに選んだ系について確率min(1,r)で状態を交換する
-            const int exchange_freq = 10;
+            const int exchange_freq = 1;
             if (i % exchange_freq == 0) {
                 int j = uniform_rand(0, 1); // 0<->1 or 1<->2
                 float nu = gauss_kernel(t[j], temperatures[j+1]) * gauss_kernel(t[j+1], temperatures[j]);
@@ -62,13 +62,32 @@ int main(int argc, char *argv[]) {
         samples.resize(samples.size() - n_burnin);
 
         // EAP推定値を求める
-        std::cout << format_str("mean: %f", std::accumulate(samples.begin(), samples.end(), 0.0f) / samples.size()) << std::endl;
+        float mean = std::accumulate(samples.begin(), samples.end(), 0.0f) / samples.size();
+        std::cout << format_str("mean: %f", mean) << std::endl;
+
+        float var = 0.0f;
+        for (auto v : samples) {
+            var += std::pow((v - mean), 2) / samples.size();
+        }
+        std::cout << format_str("variance: %f", var) << std::endl;
 
         // プロットする
         std::ofstream ofs("output");
         for (auto v : samples) {
             ofs << format_str("%f", v) << std::endl;
         }
+
+        // // 自己相関を計算する
+        // vec_t correlations(50);
+        // for (size_t k = 0; k < correlations.size(); k++) {
+        //     for (size_t i = 0; i < samples.size() / 2; i++) {
+        //         correlations[k] += (samples[i] - mean) * (samples[i + k] - mean) / (samples.size() / 2) / var;
+        //     }
+        // }
+        // std::ofstream ofs("output");
+        // for (auto v : correlations) {
+        //     ofs << format_str("%f", v) << std::endl;
+        // }
 
     } catch (const std::exception &e) {
         std::cerr << colorant('y', format_str("error: %s", e.what())) << std::endl;

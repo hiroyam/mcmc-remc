@@ -73,18 +73,24 @@ set offsets 0.1, 0.1, 0.1, 0.1
 
 # plot s(x), exp(log(s(x)) * 0.1), exp(log(s(x)) * 0.01)
 
-set xrange [-20:20]
-t(x) = exp (- (x+10) * (x+10) / (2*1)) / sqrt(2*pi*1) / 2 + \
-       exp (- (x-10) * (x-10) / (2*1)) / sqrt(2*pi*1) / 2
-binwidth = 0.4
-filter(x,y)=int(x/y)*y
-sum  = 0
-s(x) = ((sum=sum+1), 0)
-plot "output" u (filter($1,binwidth)):(1.0/(binwidth*900000)) smooth frequency with boxes ls 10 lw 1 t '', \
-     t(x) ls 12 t ''
+# set xrange [-20:20]
+# t(x) = exp (- (x+10) * (x+10) / (2*1)) / sqrt(2*pi*1) / 2 + \
+#        exp (- (x-10) * (x-10) / (2*1)) / sqrt(2*pi*1) / 2
+# binwidth = 0.4
+# filter(x,y)=int(x/y)*y
+# sum  = 0
+# s(x) = ((sum=sum+1), 0)
+# plot "output" u (filter($1,binwidth)):(1.0/(binwidth*900000)) smooth frequency with boxes ls 10 lw 1 t '', \
+#      t(x) ls 12 t ''
 
 # plot t(x)    ls 10 t 'T=1',  \
 # t(x) ** 0.1  ls 11 t 'T=10', \
 # t(x) ** 0.01 ls 12 t 'T=100'
+
+# set xlabel "lag"
+# set ylabel "auto-correlation"
+# plot "output" using 1 ls 10 t 'remc', \
+#      "output2" using 1 ls 12 t 'mh',
+
 
 EOF
