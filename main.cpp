@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 
         for (int i = 0; i < n_loop; i++) {
 
-			// それぞれの系で独立にMCMCを行う
+            // それぞれの系で独立にMCMCを行う
             for (int j = 0; j < n_systems; j++) {
 
                 // ランダムウォークMH法
