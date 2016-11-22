@@ -27,4 +27,5 @@ Replica Exchange Monte Carlo method (Parallel-Tempering)
 ![](images/plot3.png)
 
 通常のランダムウォーク法では同じ峰に囚われ続ける傾向があるため自己相関が高くなってしまいますが、レプリカ交換モンテカルロ法では低く抑えることができます。
+
 ![](images/plot4.png)
