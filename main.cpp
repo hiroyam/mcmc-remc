@@ -5,7 +5,7 @@ using namespace cc;
 float gauss_kernel(float x, float temperature) {
     float inverse_temperature = 1.0f / temperature;
 
-    auto multimordal_gauss = [](float x) {
+    auto multimordal_gauss = [](float x) -> float {
         return std::exp(-std::pow(x - 10, 2) / 2.0f) / std::sqrt(2.0f * M_PI) +
                std::exp(-std::pow(x + 10, 2) / 2.0f) / std::sqrt(2.0f * M_PI);
     };
