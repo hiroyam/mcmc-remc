@@ -1,8 +1,8 @@
-# remc
+# mcmc-remc
 
 Replica Exchange Monte Carlo method (Parallel-Tempering)
 
-[![Build Status](https://travis-ci.org/hiroyam/remc.svg?branch=master)](https://travis-ci.org/hiroyam/remc)
+[![Build Status](https://travis-ci.org/hiroyam/mcmc-remc.svg?branch=master)](https://travis-ci.org/hiroyam/mcmc-remc)
 
 ---
 
